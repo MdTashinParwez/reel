@@ -38,11 +38,26 @@ export async function POST(request: NextRequest){
           console.error("Registration error:", error);
         return NextResponse.json(
 
-                    {error: "]Failed to register user."},
+                    {error: "Failed to register user."},
                     {status: 500}
                 ) ;
         
     }
 }
+
+
+
+
+
+
+// fronted code
+
+// const res = fetch("/api/auth/register",{
+//     method: "POST",
+//     headers: {" Contendt-Type": "application/json"},
+//     body: JSON.stringify({email, password})
+// })
+
+// res.json()
 
 

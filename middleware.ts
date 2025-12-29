@@ -14,8 +14,8 @@ export default withAuth(
                 //allow the requests if the following is true
                 if(
                     pathname.startsWith("/api/auth") ||
-                    pathname.startsWith("/login") ||
-                    pathname.startsWith("/register")
+                    pathname==="/login" ||
+                    pathname==="/register"  
                 ){
                     return true;
                 }

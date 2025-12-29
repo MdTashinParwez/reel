@@ -47,13 +47,17 @@ export const authOptions : NextAuthOptions ={
     }),
 ],
 
-callbacks:{
+callbacks:{    // next js automatically call kr ta h 
     async jwt({token,user}){
         if(user){
             token.id = user.id;
         }
         return token;
     },
+
+
+    //session callback tab chalta hai:
+     //jab frontend pe useSession() call hota hai
     async session({session, token}){
 
         if(session.user){

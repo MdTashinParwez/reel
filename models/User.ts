@@ -1,7 +1,8 @@
 import mongoose, {Schema,model,models} from "mongoose";
 import bcrypt from "bcryptjs";
 
-
+// typescript interface 
+// just like using mongoose
 export interface IUser{
     email: string;
     password: string;
@@ -10,6 +11,7 @@ export interface IUser{
     updatedAt?: Date;
 }  
 
+// schema user 
 const userSchema = new mongoose.Schema<IUser>(
     {
         email:{type: String, required: true, unique: true},
@@ -20,6 +22,7 @@ const userSchema = new mongoose.Schema<IUser>(
     }
 );
 
+// if password modified to fir encrpt 
 userSchema.pre("save", async function (next){
     if(this.isModified("password")){
         this.password = await bcrypt.hash(this.password, 10);
