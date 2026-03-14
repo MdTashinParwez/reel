@@ -7,5 +7,5 @@ declare global{ // declare a global variable named mongoose with the specified t
     }
 }
 
-export{}; 
+export{};  // export an empty object to make this file a module and avoid polluting the global namespace
  
