@@ -14,23 +14,23 @@ export const authOptions : NextAuthOptions ={
         },
         async authorize(credentials){
             if(!credentials?.email || !credentials?.password){
-                throw new Error("Email and password are required.");
-            }
+                throw new Error("kya kar rhe ho bhai email aur password dono do");
+            } 
 
-
+ 
             try {
                 await connectToDatabase();
 
                 const user = await User.findOne({email: credentials.email});
 
                 if(!user){
-                    throw new Error("No user found with the provided email.");
+                    throw new Error("mere bhai email galat hai aise hi try mat krte raho");
                 }
 
                 const isValid = await bcrypt.compare(credentials.password,user.password);
 
                 if(!isValid){
-                    throw new Error("Invalid password.");
+                    throw new Error("Kyu request bhda rhe ho password galat hai dimg kharab krne ki koshish mat kro");
                 }
 
 
@@ -40,7 +40,7 @@ export const authOptions : NextAuthOptions ={
                 
             } catch (error) {
                 console.error("Authorize error:", error);
-                throw new Error("Failed to authorize user.");
+                throw new Error("oh no kya kar rhe ho bhai, kuch to gadbad hai");
                 
             }
         }
