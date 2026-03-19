@@ -4,7 +4,6 @@ import { IKUpload } from "imagekitio-next";
 import { IKUploadResponse } from "imagekitio-next/dist/types/components/IKUpload/props";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
-import { IKUploadProps } from "imagekitio-react/dist/types/components/IKUpload/props";
 
 interface FileUploadProps {
   onSuccess: (res: IKUploadResponse) => void;
@@ -32,6 +31,7 @@ export default function FileUpload({
   };
 
   const handleStartUpload = () => {
+    console.log("Upload started");
     setUploading(true);
     setError(null);
   };
@@ -53,10 +53,11 @@ export default function FileUpload({
         setError("Video size must be less than 100MB");
         return false;
       }
-    } else {
-      const validTypes = ["image/jpeg", "image/png", "image/webp"];
+    } 
+    else {
+      const validTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
       if (!validTypes.includes(file.type)) {
-        setError("Please upload a valid image file (JPEG, PNG, or WebP)");
+        setError("Please upload a valid image file (JPEG, PNG, or WebP format )");
         return false;
       }
       if (file.size > 10 * 1024 * 1024) {

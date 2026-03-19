@@ -3,8 +3,7 @@ import { connectToDatabase } from "@/lib/db"
 import { getServerSession } from "next-auth"
 import { NextRequest, NextResponse } from "next/server"
 import Video, { IVideo } from "@/models/videos"
-import { error } from "console"
-import { transform } from "next/dist/build/swc/generated-native"
+
 
 export async function GET(){
     try {
@@ -17,7 +16,7 @@ export async function GET(){
     } catch (error) {
         return NextResponse.json(
             {error: "Failed to fetch videos"},
-            {status: 200}
+            {status: 500}
         )
     }
 }
@@ -39,7 +38,7 @@ export async function POST (request: NextRequest){
         !body.title ||
         !body.description ||
         !body.videoUrl ||
-        !body.thubnailUrl 
+        !body.thumbnailUrl 
 
       ){
         return NextResponse.json(
@@ -66,7 +65,7 @@ export async function POST (request: NextRequest){
           return NextResponse.json(
 
             {error: " Failed to create a videos"},
-            {status:200}
+            {status:590}
         );
 
         
