@@ -72,6 +72,21 @@ export default function FileUpload({
     <div className="space-y-2">
       <IKUpload
         fileName={fileType === "video" ? "video" : "image"}
+         authenticator={async () => {
+    console.log("AUTH CALLED"); // debug
+
+    const res = await fetch("/api/imagekit-auth");
+
+    if (!res.ok) {
+      throw new Error("Auth request failed");
+    }
+
+    const data = await res.json();
+
+    console.log("AUTH RESPONSE:", data); // debug
+
+    return data;
+  }}
         onError={onError}
         onSuccess={handleSuccess}
         onUploadStart={handleStartUpload}

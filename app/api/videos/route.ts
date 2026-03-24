@@ -10,7 +10,7 @@ export async function GET(){
         await connectToDatabase()
         const videos =await Video.find({}).sort({createdAt: -1}).lean()
         if(!videos || videos.length === 0){
-            return NextResponse.json([], {status:200})
+            return NextResponse.json(["No videos found || Upload one!"], {status:200})
         }
         return NextResponse.json(videos)
     } catch (error) {
@@ -43,7 +43,7 @@ export async function POST (request: NextRequest){
       ){
         return NextResponse.json(
 
-            {error: " Missing required fields"},
+            {error: "Missing required fields: title, description, videoUrl, thumbnailUrl"},
             {status:400}
         );
 
@@ -64,7 +64,7 @@ export async function POST (request: NextRequest){
     } catch (error) {
           return NextResponse.json(
 
-            {error: " Failed to create a videos"},
+            {error: " Failed to create video"},
             {status:590}
         );
 

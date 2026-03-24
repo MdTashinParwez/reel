@@ -12,7 +12,7 @@ class ApiClient {
   private async fetch<T>(
     endpoint: string,
     options: FetchOptions = {}
-  ): Promise<T> {
+  ) : Promise<T> {
     const { method = "GET", body, headers = {} } = options;
 
     const defaultHeaders = {
@@ -37,7 +37,7 @@ class ApiClient {
     return this.fetch<IVideo[]>("/videos");
   }
 
-  async getVideo(id: string) {
+  async getAVideo(id: string) {
     return this.fetch<IVideo>(`/videos/${id}`);
   }
 

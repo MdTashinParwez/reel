@@ -8,9 +8,12 @@ interface VideoFeedProps {
 export default function VideoFeed({ videos }: VideoFeedProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {videos.map((video) => (
-        <VideoComponent key={video._id?.toString()} video={video} />
-      ))}
+    {videos.map((video, index) => (
+  <VideoComponent
+    key={video._id?.toString() || index}
+    video={video}
+  />
+))}
 
       {videos.length === 0 && (
         <div className="col-span-full text-center py-12">
