@@ -194,7 +194,7 @@ export default function Login() {
           <div className="flex-1 h-px bg-gray-700" />
         </div>
 
-        {/* Social (Disabled for now) */}
+      
         <div className="space-y-3">
           <button
             disabled
