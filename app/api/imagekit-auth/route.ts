@@ -10,7 +10,7 @@ const imagekit = new ImageKit({
 
 export async function GET(){
     try {
-        //  console.log("PRIVATE KEY:", process.env.IMAGEKIT_PRIVATE_KEY);
+        
         const authenticationParameters = imagekit.getAuthenticationParameters()
         return NextResponse.json(authenticationParameters);
         

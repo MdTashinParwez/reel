@@ -46,14 +46,4 @@ export async function POST(request: NextRequest){
 
 
 
-// fronted code
-
-// const res = fetch("/api/auth/register",{
-//     method: "POST",
-//     headers: {" Contendt-Type": "application/json"},
-//     body: JSON.stringify({email, password})
-// })
-
-// res.json()
-
 
