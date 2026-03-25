@@ -1,9 +1,122 @@
+// "use client";
+
+// import { IKUpload } from "imagekitio-next";
+// import { IKUploadResponse } from "imagekitio-next/dist/types/components/IKUpload/props";
+// import { useState } from "react";
+// import { Loader2 } from "lucide-react";
+
+// interface FileUploadProps {
+//   onSuccess: (res: IKUploadResponse) => void;
+//   onProgress?: (progress: number) => void;
+//   fileType?: "image" | "video";
+// }
+
+// export default function FileUpload({
+//   onSuccess,
+//   onProgress,
+//   fileType = "image",
+// }: FileUploadProps) {
+//   const [uploading, setUploading] = useState(false);
+//   const [error, setError] = useState<string | null>(null);
+
+//   const onError = (err: { message: string }) => {
+//     setError(err.message);
+//     setUploading(false);
+//   };
+
+//   const handleSuccess = (response: IKUploadResponse) => {
+//     setUploading(false);
+//     setError(null);
+//     onSuccess(response);
+//   };
+
+//   const handleStartUpload = () => {
+//     console.log("Upload started");
+//     setUploading(true);
+//     setError(null);
+//   };
+
+//   const handleProgress = (evt: ProgressEvent) => {
+//     if (evt.lengthComputable && onProgress) {
+//       const percentComplete = (evt.loaded / evt.total) * 100;
+//       onProgress(Math.round(percentComplete));
+//     }
+//   };
+
+//   const validateFile = (file: File) => {
+//     if (fileType === "video") {
+//       if (!file.type.startsWith("video/")) {
+//         setError("Please upload a valid video file");
+//         return false;
+//       }
+//       if (file.size > 500 * 1024 * 1024) {
+//         setError("Video size must be less than 100MB");
+//         return false;
+//       }
+//     } 
+//     else {
+//       const validTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
+//       if (!validTypes.includes(file.type)) {
+//         setError("Please upload a valid image file (JPEG, PNG, or WebP format )");
+//         return false;
+//       }
+//       if (file.size > 10 * 1024 * 1024) {
+//         setError("File size must be less than 5MB");
+//         return false;
+//       }
+//     }
+//     return true;
+//   };
+
+//   return (
+//     <div className="space-y-2">
+//       <IKUpload
+//         fileName={fileType === "video" ? "video" : "image"}
+//          authenticator={async () => {
+//     console.log("AUTH CALLED"); // debug
+
+//     const res = await fetch("/api/imagekit-auth");
+
+//     if (!res.ok) {
+//       throw new Error("Auth request failed");
+//     }
+
+//     const data = await res.json();
+
+//     console.log("AUTH RESPONSE:", data); // debug
+
+//     return data;
+//   }}
+//         onError={onError}
+//         onSuccess={handleSuccess}
+//         onUploadStart={handleStartUpload}
+//         onUploadProgress={handleProgress}
+//         accept={fileType === "video" ? "video/*" : "image/*"}
+//         className="file-input file-input-bordered w-full"
+//         validateFile={validateFile}
+//         useUniqueFileName={true}
+//         folder={fileType === "video" ? "/videos" : "/images"}
+//       />
+
+//       {uploading && (
+//         <div className="flex items-center gap-2 text-sm text-primary">
+//           <Loader2 className="w-4 h-4 animate-spin" />
+//           <span>Uploading...</span>
+//         </div>
+//       )}
+
+//       {error && <div className="text-error text-sm">{error}</div>}
+//     </div>
+//   );
+// }
+
 "use client";
 
 import { IKUpload } from "imagekitio-next";
 import { IKUploadResponse } from "imagekitio-next/dist/types/components/IKUpload/props";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface FileUploadProps {
   onSuccess: (res: IKUploadResponse) => void;
@@ -16,7 +129,10 @@ export default function FileUpload({
   onProgress,
   fileType = "image",
 }: FileUploadProps) {
+  const router = useRouter();
+
   const [uploading, setUploading] = useState(false);
+  const [uploaded, setUploaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const onError = (err: { message: string }) => {
@@ -27,13 +143,19 @@ export default function FileUpload({
   const handleSuccess = (response: IKUploadResponse) => {
     setUploading(false);
     setError(null);
+    setUploaded(true);
     onSuccess(response);
+
+    // ✅ Auto redirect after 3 sec
+    setTimeout(() => {
+      router.push("/");
+    }, 3000);
   };
 
   const handleStartUpload = () => {
-    console.log("Upload started");
     setUploading(true);
     setError(null);
+    setUploaded(false);
   };
 
   const handleProgress = (evt: ProgressEvent) => {
@@ -49,18 +171,17 @@ export default function FileUpload({
         setError("Please upload a valid video file");
         return false;
       }
-      if (file.size > 500 * 1024 * 1024) {
+      if (file.size > 100 * 1024 * 1024) {
         setError("Video size must be less than 100MB");
         return false;
       }
-    } 
-    else {
+    } else {
       const validTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
       if (!validTypes.includes(file.type)) {
-        setError("Please upload a valid image file (JPEG, PNG, or WebP format )");
+        setError("Please upload a valid image file (JPEG, PNG, WebP)");
         return false;
       }
-      if (file.size > 10 * 1024 * 1024) {
+      if (file.size > 5 * 1024 * 1024) {
         setError("File size must be less than 5MB");
         return false;
       }
@@ -69,24 +190,24 @@ export default function FileUpload({
   };
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-3">
       <IKUpload
         fileName={fileType === "video" ? "video" : "image"}
-         authenticator={async () => {
-    console.log("AUTH CALLED"); // debug
+        authenticator={async () => {
+          const res = await fetch("/api/imagekit-auth");
 
-    const res = await fetch("/api/imagekit-auth");
+          if (!res.ok) {
+            throw new Error("Auth request failed");
+          }
 
-    if (!res.ok) {
-      throw new Error("Auth request failed");
-    }
+          const data = (await res.json()) as {
+            signature: string;
+            expire: number;
+            token: string;
+          };
 
-    const data = await res.json();
-
-    console.log("AUTH RESPONSE:", data); // debug
-
-    return data;
-  }}
+          return data;
+        }}
         onError={onError}
         onSuccess={handleSuccess}
         onUploadStart={handleStartUpload}
@@ -98,6 +219,7 @@ export default function FileUpload({
         folder={fileType === "video" ? "/videos" : "/images"}
       />
 
+      {/* Uploading State */}
       {uploading && (
         <div className="flex items-center gap-2 text-sm text-primary">
           <Loader2 className="w-4 h-4 animate-spin" />
@@ -105,7 +227,24 @@ export default function FileUpload({
         </div>
       )}
 
+      {/* Error State */}
       {error && <div className="text-error text-sm">{error}</div>}
+
+      {/* Success State */}
+      {uploaded && (
+        <div className="flex flex-col gap-2">
+          <p className="text-green-500 text-sm">
+            ✅ Uploaded successfully! Redirecting in 3 seconds...
+          </p>
+
+          <button
+            onClick={() => router.push("/")}
+            className="btn btn-primary btn-sm w-fit"
+          >
+            Go to Home
+          </button>
+        </div>
+      )}
     </div>
   );
 }

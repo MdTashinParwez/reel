@@ -210,7 +210,7 @@ export default function Login() {
             Continue with Instagram (Coming soon)
           </button>
 
-       /
+       
         </div>
 
         {/* Info Text */}
