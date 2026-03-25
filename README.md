@@ -6,6 +6,10 @@ It enables users to ***register***, ***upload***, and ***watch*** ***vertical***
 
 Designed with a focus on ***performance***, ***simplicity***, and ***user*** ***experience***, ReelDrop delivers a clean interface, real-time upload feedback, and a mobile-friendly viewing format optimized for short-form video consumption.
 
+##🔗 Live Demo :
+-  https://reeldrop-beryl.vercel.app/
+  
+
 ---
 
 ## 🔹 Features
@@ -99,5 +103,5 @@ yarn dev
 - Dark mode toggle for user experience.
 
 ##🔗 Live Demo :
-- 
+-  https://reeldrop-beryl.vercel.app/
   
