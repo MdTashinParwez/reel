@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 ReelDrop – Video Reels Platform
 
-## Getting Started
 
-First, run the development server:
+**ReelDrop** is a modern video reels platform built with **Next.js**, **TypeScript**, **Tailwind CSS**, **MongoDB**, and **ImageKit** for cloud video uploads.  
+Users can register, upload videos, and watch videos . 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔹 Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### **User Authentication**
+- Register & Login system using **NextAuth.js**  
+- JWT-based sessions with secure user identification  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### **Video Upload**
+- Upload videos with title, description, thumbnail, and auto quality detection  
+- Upload progress tracking  
 
-## Learn More
+### **Video Feed**
+- Vertical scrollable Reels-like feed  
+- One video per screen with **9:16 aspect ratio**  
 
-To learn more about Next.js, take a look at the following resources:
+### **Professional UI**
+- Responsive and modern design with Tailwind CSS  
+- Cards, shadows, hover effects for video components  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### **Notifications**
+- Toast notifications for success, errors, and info messages  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### **Admin Dashboard**
+- Upload videos after login  
+- Simple and intuitive account dropdown  
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛠 Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | Next.js, React, TypeScript, Tailwind CSS |
+| Backend | Next.js API Routes, Node.js, TypeScript |
+| Database | MongoDB with Mongoose |
+| Storage | ImageKit (Cloud Video Storage) |
+| Authentication | NextAuth.js (JWT-based) |
+| Icons & UI | Lucide React, DaisyUI |
+
+---
+
+## 📂 Project Structure
