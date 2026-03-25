@@ -30,7 +30,8 @@ class ApiClient {
       throw new Error(await response.text());
     }
 
-    return response.json();
+    const data: T = await response.json();
+  return data;
   }
 
   async getVideos() {
