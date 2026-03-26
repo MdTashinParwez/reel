@@ -91,7 +91,7 @@ export default function VideoUploadForm() {
         {uploadProgress > 0 && (
           <div className="w-full bg-gray-800 rounded-full h-2 mt-3">
             <div
-              className="bg-gradient-to-r from-pink-500 to-red-500 h-2 rounded-full transition-all duration-300"
+              className="`bg-gradient-to-r` from-pink-500 to-red-500 h-2 rounded-full transition-all duration-300"
               style={{ width: `${uploadProgress}%` }}
             />
           </div>
@@ -138,7 +138,7 @@ export default function VideoUploadForm() {
       <button
         type="submit"
         disabled={loading || !watch("videoUrl")}
-        className="w-full py-3 rounded-xl bg-gradient-to-r from-pink-500 to-red-500 font-semibold text-white shadow-lg hover:scale-[1.02] active:scale-[0.98] transition flex items-center justify-center gap-2 disabled:opacity-50"
+        className="w-full py-3 rounded-xl `bg-gradient-to-r` from-pink-500 to-red-500 font-semibold text-white shadow-lg hover:scale-[1.02] active:scale-[0.98] transition flex items-center justify-center gap-2 disabled:opacity-50"
       >
         {loading ? (
           <>
